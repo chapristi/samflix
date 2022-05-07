@@ -3,18 +3,67 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/sandl/tes/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/sandl/tes/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Netflix - Watch TV Shows Online, Watch Movies Online</title>
+        <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet">
+        <link rel="icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+
+    </head>
+
+
+
+    <body>
+
+    <header class="showcase">
+        <div class="showcase-top">
+            <img src="logo.png" alt="Netflix Logo">
+            <a href="/login" class="btn btn-rounded">Sign In</a>
+        </div>
+        <div class="showcase-content">
+            <h1>Unlimited movies, TV shows and more.</h1>
+            <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            <input type="email" name="email" id="mail" placeholder="Email address">
+            <a href="/register" class="btn btn-lg">GET STARTED ></a>
+        </div>
+    </header>
+
+
+
+    <footer class="footer">
+        <p>Questions? Call 000-800-040-1843</p>
+        <div class="footer-cols">
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Investor Relations</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Speed Test</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Help Centre</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Cookie Preferences</a></li>
+                <li><a href="#">Watch for Free</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Ways to Watch</a></li>
+                <li><a href="#">Corporate Information</a></li>
+                <li><a href="#">Legal Notices</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Media Centre</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Netflix Originals</a></li>
+            </ul>
+        </div>
+    </footer>
+    </body>
+
 {% endblock %}
