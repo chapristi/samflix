@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\CategoriesOfUpload;
 use App\Entity\Category;
+use App\Entity\Serie;
+use App\Entity\SerieUpload;
 use App\Entity\Uploads;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -84,5 +86,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Uploads', 'fas fa-list', Uploads::class);
         yield MenuItem::linkToCrud('Category', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('categoriesOfUploads', 'fas fa-list', CategoriesOfUpload::class);
+        yield MenuItem::linkToCrud('serie', 'fas fa-list', Serie::class);
+        yield MenuItem::linkToCrud('serieUploads', 'fas fa-list', SerieUpload::class);
     }
 }

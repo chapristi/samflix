@@ -31,7 +31,7 @@
                 <a href="#movies">Films</a>
             </nav>
             <nav class="sub-nav">
-              
+
                 <a href="#">Account</a>
 
                 <form action="" method="post"> <input placeholder="chercher par titre" name="search" id="search" type="text"></form>
@@ -39,21 +39,20 @@
         </header>
         <!-- END OF HEADER -->
 
-
         <!-- MAIN CONTAINER -->
-        {% for categories in categorie %}
         <section class="main-container" >
             <div class="location" id="home">
-                <h1 id="home">{{ categories.name }}</h1>
+                <h1 id="home">Correspond à ma recherche</h1>
                 <div class="box">
-                    {% for series in serie %}
-                        {% if categories.name == series.category.name  %}
-                        <a href="/show/{{ series.serie.token}}"><img src="uploads/img/{{ series.serie.image }}" alt=""></a>
-                        {% endif %}
+                    {%  for results in result %}
+
+                        <a href="/show/{{ results.token }}"><img src="uploads/img/{{ results.image }}" ></a>
+
+
                     {% endfor %}
+
                 </div>
             </div>
-            {% endfor %}
 
 
             <!-- END OF MAIN CONTAINER -->
@@ -90,7 +89,7 @@
                 <p>&copy 1997-2018 Netflix, Inc.</p>
                 <p>Carlos Avila &copy 2018</p>
             </footer>
-            </section>
+        </section>
     </div>
     </body>
 

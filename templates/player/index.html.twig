@@ -3,39 +3,93 @@
 {% block title %}Hello PlayerController!{% endblock %}
 
 {% block body %}
-    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-    <video id="video-id" width="100%" height="100%" autoplay="false"><source src="https://www.youtube.com/watch?v=BtyHYIpykN0&list=RDBtyHYIpykN0" type="video/mp4" />
-        <script>
-            var myFP = fluidPlayer(
-                'video-id',	{
-                    "layoutControls": {
-                        "controlBar": {
-                            "autoHideTimeout": 3,
-                            "animated": true,
-                            "autoHide": true
-                        },
-                        "htmlOnPauseBlock": {
-                            "html": null,
-                            "height": "",
-                            "width": null
-                        },
-                        "autoPlay": true,
-                        "mute": true,
-                        "allowTheatre": false,
-                        "playPauseAnimation": true,
-                        "playbackRateEnabled": true,
-                        "allowDownload": false,
-                        "playButtonShowing": true,
-                        "fillToContainer": false,
-                        "posterImage": ""
-                    },
-                    "vastOptions": {
-                        "adList": [],
-                        "adCTAText": false,
-                        "adCTATextPosition": ""
-                    }
-                })
+    <head>
+        <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
+    </head>
 
-        </script>
-    </video>
+
+
+
+
+
+<style>
+    body {
+        background-color: black;
+
+    }
+    video{
+
+
+
+
+    }
+</style>
+
+<body>
+<center>
+
+
+<video
+        id="my-video"
+        class="video-js"
+        controls
+        preload="auto"
+        poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+>
+    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
+    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
+    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
+
+
+
+</video>
+</center>
+
+<script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+<script>
+    var player = videojs('my-video', {
+        playbackRates: [0.5, 0.75, 1]
+    });
+
+
+    // player.controlBar.getChild("PlaybackRateMenuButton").show();
+
+    // When you pass text in options it just creates a control text,
+    // which is displayed as tooltip when hovered on
+    // this button viz the span in you div,
+
+    var fullscreen = player.controlBar.getChild("FullscreenToggle")
+    var index = player.controlBar.children().indexOf(fullscreen)
+
+
+    // If you want to register your component with name
+    const Button = videojs.getComponent("Button");
+    var heartComponent = videojs.extend(Button);
+    videojs.registerComponent("Heart", heartComponent);
+
+    var myButton = player.controlBar.addChild("Heart", {}, index);
+
+    console.log(player.controlBar.children());
+
+
+    // There are many functions available for button component
+    // like below mentioned in this docs
+    // https://docs.videojs.com/button.
+    // You can set attributes and clasess as well.
+
+    // Getting html DOM
+    var myButtonDom = myButton.el();
+    // Since now you have the html dom element
+    // you can add click events
+
+    // Now I am setting the text as you needed.
+    myButtonDom.innerHTML = "<span class=''>></span>";
+
+    // Adding a click event function
+    myButtonDom.onclick = function(){
+        window.location.href = "/";
+    }
+</script>
+
 {% endblock %}
+

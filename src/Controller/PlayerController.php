@@ -15,4 +15,5 @@ class PlayerController extends AbstractController
             'controller_name' => 'PlayerController',
         ]);
     }
+
 }

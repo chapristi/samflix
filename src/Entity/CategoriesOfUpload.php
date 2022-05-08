@@ -18,9 +18,11 @@ class CategoriesOfUpload
 
     private $category;
 
-    #[ORM\ManyToOne(targetEntity: Uploads::class, inversedBy: 'categoriesOfUploads')]
+    #[ORM\ManyToOne(targetEntity: Serie::class, inversedBy: 'categoriesOfUploads')]
     #[ORM\JoinColumn(nullable: false)]
-    private $Upload;
+    private $serie;
+
+
 
     public function getId(): ?int
     {
@@ -39,15 +41,17 @@ class CategoriesOfUpload
         return $this;
     }
 
-    public function getUpload(): ?Uploads
+    public function getSerie(): ?Serie
     {
-        return $this->Upload;
+        return $this->serie;
     }
 
-    public function setUpload(?Uploads $Upload): self
+    public function setSerie(?Serie $serie): self
     {
-        $this->Upload = $Upload;
+        $this->serie = $serie;
 
         return $this;
     }
+
+
 }

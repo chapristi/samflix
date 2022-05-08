@@ -36,9 +36,12 @@ class Uploads
 
     #[ORM\OneToMany(mappedBy: 'Upload', targetEntity: CategoriesOfUpload::class)]
     private $categoriesOfUploads;
+
+    #[ORM\OneToMany(mappedBy: 'upload', targetEntity: SerieUpload::class)]
+    private $serieUploads;
     public function __construct(){
         $this->token =Uuid::uuid4();
-        $this->categoriesOfUploads = new ArrayCollection();
+        $this->serieUploads = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,30 +121,33 @@ class Uploads
         return $this;
     }
 
+
+
+
     /**
-     * @return Collection<int, CategoriesOfUpload>
+     * @return Collection<int, SerieUpload>
      */
-    public function getCategoriesOfUploads(): Collection
+    public function getSerieUploads(): Collection
     {
-        return $this->categoriesOfUploads;
+        return $this->serieUploads;
     }
 
-    public function addCategoriesOfUpload(CategoriesOfUpload $categoriesOfUpload): self
+    public function addSerieUpload(SerieUpload $serieUpload): self
     {
-        if (!$this->categoriesOfUploads->contains($categoriesOfUpload)) {
-            $this->categoriesOfUploads[] = $categoriesOfUpload;
-            $categoriesOfUpload->setUpload($this);
+        if (!$this->serieUploads->contains($serieUpload)) {
+            $this->serieUploads[] = $serieUpload;
+            $serieUpload->setUpload($this);
         }
 
         return $this;
     }
 
-    public function removeCategoriesOfUpload(CategoriesOfUpload $categoriesOfUpload): self
+    public function removeSerieUpload(SerieUpload $serieUpload): self
     {
-        if ($this->categoriesOfUploads->removeElement($categoriesOfUpload)) {
+        if ($this->serieUploads->removeElement($serieUpload)) {
             // set the owning side to null (unless already changed)
-            if ($categoriesOfUpload->getUpload() === $this) {
-                $categoriesOfUpload->setUpload(null);
+            if ($serieUpload->getUpload() === $this) {
+                $serieUpload->setUpload(null);
             }
         }
 
