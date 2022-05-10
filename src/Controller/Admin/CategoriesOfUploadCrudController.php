@@ -24,7 +24,7 @@ class CategoriesOfUploadCrudController extends AbstractCrudController
                     'by_reference' => true
                 ])
                 ->autocomplete(),
-            yield AssociationField::new('Upload')
+            yield AssociationField::new('serie')
                 ->setFormTypeOptions([
                     'by_reference' => true,
                 ])
