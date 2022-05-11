@@ -20,7 +20,6 @@ class PlayerController extends AbstractController
     public function index(SerieUploadRepository $serieUploadRepository, HistoricalRepository $historicalRepository,$token,UploadsRepository $uploadsRepository): Response
     {
         $video = $uploadsRepository->findOneBy(["token"=>$token]);
-
         if (!$video){
             return $this->redirectToRoute("app_main");
 
@@ -30,10 +29,13 @@ class PlayerController extends AbstractController
         $episodes = $serieUploadRepository->findBy(["serie"=>$serieUpload->getId()]);
         $next = [];
         foreach($episodes as $episode){
-            if($episode->getUpload()->getEpisode() === $video->getEpisode()+1){
-                $next[] = [$episode];
+
+            if((int)$episode->getUpload()->getEpisode() === (int)$video->getEpisode()+1){
+
+                $next[] = $episode;
             }
         }
+
 
 
 
@@ -46,9 +48,11 @@ class PlayerController extends AbstractController
             $this->entityManager->flush();
         }
 
+
         return $this->render('player/index.html.twig', [
             'controller_name' => 'PlayerController',
-            "next" => $next["token"] ?? ""  ,
+            "next" => $next ? $next : ""   ,
+            "video" => $video
         ]);
     }
 

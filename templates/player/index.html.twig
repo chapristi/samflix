@@ -4,12 +4,13 @@
 
 {% block body %}
     <head>
-        <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
+        <meta charset="utf-8">
+        <title>Video.js Resolution Switcher</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://kmoskwiak.github.io/videojs-resolution-switcher/node_modules/video.js/dist/video-js.min.css" rel="stylesheet">
+        <link href="https://kmoskwiak.github.io/videojs-resolution-switcher/node_modules/videojs-resolution-switcher/lib/videojs-resolution-switcher.css" rel="stylesheet">
+
     </head>
-
-
-
-
 
 
 <style>
@@ -18,79 +19,73 @@
 
     }
     video{
-
-
-
-
+        height:90%;
+        width : 90%;
     }
+
 </style>
 
-<body>
-<center>
+<center><video id='video' class="video-js vjs-default-skin"></video></center>
 
 
-<video
-        id="my-video"
-        class="video-js"
-        controls
-        preload="auto"
-        poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
->
-
-    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
-    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
-    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
-
-
-
-</video>
-</center>
-
-<script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+<script src="https://kmoskwiak.github.io/videojs-resolution-switcher/node_modules/video.js/dist/video.js"></script>
 <script>
-    var player = videojs('my-video', {
-        playbackRates: [0.5, 0.75, 1]
-    });
-
-
-    // player.controlBar.getChild("PlaybackRateMenuButton").show();
-
-    // When you pass text in options it just creates a control text,
-    // which is displayed as tooltip when hovered on
-    // this button viz the span in you div,
-
-    var fullscreen = player.controlBar.getChild("FullscreenToggle")
-    var index = player.controlBar.children().indexOf(fullscreen)
-
-
-    // If you want to register your component with name
-    const Button = videojs.getComponent("Button");
-    var heartComponent = videojs.extend(Button);
-    videojs.registerComponent("Heart", heartComponent);
-
-    var myButton = player.controlBar.addChild("Heart", {}, index);
-
-    console.log(player.controlBar.children());
-
-
-    // There are many functions available for button component
-    // like below mentioned in this docs
-    // https://docs.videojs.com/button.
-    // You can set attributes and clasess as well.
-
-    // Getting html DOM
-    var myButtonDom = myButton.el();
-    // Since now you have the html dom element
-    // you can add click events
-
-    // Now I am setting the text as you needed.
-    myButtonDom.innerHTML = "<span class=''>></span>";
-
-    // Adding a click event function
-    myButtonDom.onclick = function(){
-        window.location.href = "{{ next }}";
-    }
+    videojs.options.flash.swf = "../node_modules/video.js/dist/video-js.swf"
 </script>
+<script src="https://kmoskwiak.github.io/videojs-resolution-switcher/node_modules/videojs-resolution-switcher/lib/videojs-resolution-switcher.js"></script>
+<script>
+
+
+    // fire up the plugin
+    videojs('video', {
+        controls: true,
+        muted: true,
+        width: 1000,
+        plugins: {
+            videoJsResolutionSwitcher: {
+                ui: true,
+                default: "high", // Default resolution [{Number}, 'low', 'high'],
+                dynamicLabel: true // Display dynamic labels or gear symbol
+            }
+        }
+    }, function(){
+        var player = this;
+        window.player = player
+
+        player.updateSrc([
+            {
+                src: "http://127.0.0.1:8000/uploads/videos/{{ video.video }}",
+                type: 'video/mp4',
+                label: '360p',
+                res: 360
+            },
+            {
+                src: "http://127.0.0.1:8000/uploads/videos/{{ video.video }}",
+                type: 'video/mp4',
+                label: '720p',
+                res: 720
+            }
+        ])
+
+        player.on('resolutionchange', function(){
+            console.info('Source changed to %s', player.src())
+        })
+        {% if next %}
+        player.on('ended', function() {
+
+            window.location.href ="/player/video/{{ next[0].upload.token}}"
+
+        });
+        {% endif %}
+
+
+
+    })
+</script>
+
+
+
+
 
 {% endblock %}
 

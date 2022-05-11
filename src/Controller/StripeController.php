@@ -74,7 +74,7 @@ class StripeController extends AbstractController
         $order->getIdUser()->setRoles(["ROLE_VIP"]);
         $this->entityManager->flush();
         $mail = new MailService();
-        $mail->sendMail("louis.bec05@gmail.com","payment accpeted","<h3>Hey juste pour te dire : </h3><br />Ton achat a bien été effectué tu es maintenant VIP, reviens vite nous voir ");
+        $mail->sendMail($order->getIdUser()->getUserIdentifier(),"payment accpeted","<h3>Hey juste pour te dire : </h3><br />Ton achat a bien été effectué tu es maintenant VIP, reviens vite nous voir ");
         return $this->redirectToRoute("app_main");
 
 

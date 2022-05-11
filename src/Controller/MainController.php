@@ -45,11 +45,14 @@ class MainController extends AbstractController
 
     {
         $seriefind = $serie->findOneBy(["token"=>$token]);
-        $req = $serieUploadRepository->findBy(["id"=>$seriefind->getId()]);
+        $req = $serieUploadRepository->findBy(["serie"=>$seriefind->getId()]);
+
         if($seriefind->getCategory()==="film"){
             $token = $seriefind->getToken();
             return $this->redirectToRoute("app_player",["token"=>$token]);
         }
+
+
 
 
         return $this->render('main/show.html.twig', [

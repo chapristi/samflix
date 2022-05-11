@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello MainController!{% endblock %}
@@ -6,67 +7,77 @@
 
 
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Netflix - Watch TV Shows Online, Watch Movies Online</title>
-        <link href="{{ asset('assets/css/connected.css') }}" rel="stylesheet">
-        <link rel="icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+                    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+                    crossorigin="anonymous"
+                    referrerpolicy="no-referrer"
+            />
+            <title>Netflix - Watch TV Shows Online, Watch Movies Online</title>
+            <link href="{{ asset('assets/css/connected.css') }}" rel="stylesheet">
+            <link rel="icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
 
-    </head>
+        </head>
 
 
-    <body>
+        <body>
 
-    <div class="wrapper">
+        <div class="wrapper">
 
-        <!-- HEADER -->
-        <header>
-            <div class="netflixLogo">
-                <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
-            </div>
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/show/category/serie">Series</a>
-                <a href="/show/category/film">Films</a>
+            <!-- HEADER -->
+            <nav class="navbar">
+                <div class="navbar-container container">
+                    <input type="checkbox" name="" id="">
+                    <div class="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+                    <ul class="menu-items">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/show/category/serie">Serie</a></li>
+                        <li><a href="/show/category/film">Film</a></li>
+                        <li><a href="/stripe">Retirer les pubs</a></li>
+
+                        <li><form action=""  method="post"><input id="search" name="search" type="text"></form></li>
+                    </ul>
+                    <h1 class="logo">Netflix</h1>
+                </div>
             </nav>
-            <nav class="sub-nav">
-              
-                <a href="/stripe">Retirer la pub </a>
-
-                <form action="" method="post"> <input placeholder="chercher par titre" name="search" id="search" type="text"></form>
-            </nav>
-        </header>
-        <!-- END OF HEADER -->
+            <!-- END OF HEADER -->
 
 
-        <!-- MAIN CONTAINER -->
+            <!-- MAIN CONTAINER -->
 
-        <section class="main-container" >
+            <section class="main-container" >
                 <div class="location" id="home">
                     <h1 id="home">Mon Historique</h1>
                     <div class="box">
                         {% for historicals in historical %}
-                                <a href="/player/video/{{historicals.video.token}}"><img  src="uploads/img/{{ historicals.video.image }}" alt="a video"></a>
+                            <a href="/player/video/{{historicals.video.token}}"><img  src="uploads/img/{{ historicals.video.image }}" alt="a video"></a>
                         {% endfor %}
                     </div>
                 </div>
             </section>
 
-        {% for categories in categorie %}
-        <section class="main-container" >
-                <div class="location" id="home">
-                    <h1 id="home">{{ categories.name }}</h1>
-                    <div class="box">
-                        {% for series in serie %}
-                            {% if categories.name == series.category.name  %}
-                            <a href="/show/{{ series.serie.token}}"><img  src="uploads/img/{{ series.serie.image }}" alt=""></a>
-                            {% endif %}
-                        {% endfor %}
+            {% for categories in categorie %}
+                <section class="main-container" >
+                    <div class="location" id="home">
+                        <a href="show/category/{{categories.name}}"><h1 id="home">{{ categories.name }}</h1></a>
+                        <div class="box">
+                            {% for series in serie %}
+                                {% if categories.name == series.category.name  %}
+                                    <a href="/show/{{ series.serie.token}}"><img  src="uploads/img/{{ series.serie.image }}" alt=""></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             {% endfor %}
 
 
@@ -106,6 +117,6 @@
             </footer>
 
         </div>
-    </body>
+        </body>
 
-{% endblock %}
+    {% endblock %}

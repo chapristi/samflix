@@ -4,134 +4,379 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+<div class="wrapper">
+    <a href="/"><h1>site</h1></a>
 
-<article class="leaderboard">
-    <header>
-        <h1 class="leaderboard__title"><span class="leaderboard__title--top">{{ episodes[0].serie.name }}</span><span class="leaderboard__title--bottom"></span></h1>
-    </header>
+    <div class="poster">
 
-    <main class="leaderboard__profiles">
-        {% for episodes in episodes %}
-            <a href="/player/video/{{ episodes.upload.token }}">
-                <article class="leaderboard__profile">
-                    <img src="/assets/images/{{ episodes.upload.image }}" alt="" class="leaderboard__picture">
-                    <span class="leaderboard__name">{{ episodes.upload.name }}</span>
-                    <span class="leaderboard__value">45<span>mins</span></span>
-                </article>
-            </a>
-        {% endfor %}
-    </main>
     </div>
-    </article>
+    <a class="arrow__container" href="#">
+        <svg version="1.1" id="arrow">
+            <rect x="0" y="8" width="65.7" height="2"/>
+            <rect x="56.5" y="4.2" transform="matrix(0.7071 0.7071 -0.7071 0.7071 22.0808 -42.8911)" width="12.7" height="2" />
+            <rect x="56.5" y="11.8" transform="matrix(0.7071 -0.7071 0.7071 0.7071 9.3503 48.1621)" width="12.7" height="2" />
+        </svg>
+
+    </a>
+    <div id="fade" class="container-margin">
+        <div class="movie">
+            <div class="movie__score">93%</div>
+            <div class="movie__title__container">
+                <h2 class="movie__title">{{ episodes[0].serie.name }}</h2>
+            </div>
+            <ul class="movie__type">
+                <li>nouveauté</li>
+
+            </ul>
+            <p class="movie__description">{{  episodes[0].serie.description | raw }}</p>
+
+        </div>
+        <div class="review">
+            <h3 class="review__title">Episodes</h3>
+            <ul>
+                {% for episodes in episodes %}
+                <li>
+                    <div class="review__score">{{  episodes.upload.name }}</div>
+                    <a href="/player/video/{{ episodes.upload.token }}" class="review__description">
+                        <img height="250" width="250" src="/uploads/img/{{ episodes.upload.image }}" alt="">
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+
+
     <style>
-        .leaderboard {
-            max-width: 900px;
-            width: 100%;
-            border-radius: 12px;
-        }
-        .leaderboard header {
-            --start: 15%;
-            height: 130px;
-            background-color : black;
-
-            color: #fff;
-            position: relative;
-
-            overflow: hidden;
-        }
-        .leaderboard header .leaderboard__title {
-            position: absolute;
-            z-index: 2;
-            top: 50%;
-            right: calc(var(--start) * .75);
-            transform: translateY(-50%);
-            text-transform: uppercase;
-            margin-right: 16%;
-        }
-        .leaderboard header .leaderboard__title span {
+        .movie__type::after, .movie::after {
+            content: " ";
             display: block;
+            clear: both;
+            visibility: hidden;
         }
-        .leaderboard header .leaderboard__title--top {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 6.5px;
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans', sans-serif;
+            color: #fff;
         }
-        .leaderboard header .leaderboard__title--bottom {
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 3.55px;
-            opacity: 0.65;
-            transform: translateY(-2px);
-        }
-        .leaderboard header .leaderboard__icon {
-            fill: #fff;
-            opacity: 0.35;
-            width: 50px;
-            position: absolute;
-            top: 50%;
-            left: var(--start);
-            transform: translate(-50%, -50%);
-        }
-        .leaderboard__profiles {
-            background-color: black;
-            border-radius: 0 0 12px 12px;
-            padding: 15px 15px 20px;
-            display: grid;
-            row-gap: 8px;
-        }
-        .leaderboard__profile {
-            display: grid;
-            grid-template-columns: 1fr 3fr 1fr;
-            align-items: center;
-            padding: 10px 30px 10px 10px;
-            overflow: hidden;
-
-            box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
-            cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98), box-shadow 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
-            background-color: #1e293b;;
-        }
-        .leaderboard__profile:hover {
-            transform: scale(1.03);
-            box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
-        }
-        .leaderboard__picture {
-            max-width: 100%;
-            width: 200px;
-
-        }
-        .leaderboard__name {
-            color: #979cb0;
-            font-weight: 600;
-            font-size: 20px;
-            letter-spacing: 0.64px;
-            margin-left: 12px;
-        }
-        .leaderboard__value {
-            color: #35d8ac;
-            font-weight: 700;
-            font-size: 34px;
-            text-align: right;
-        }
-        .leaderboard__value > span {
-            opacity: 0.8;
-            font-weight: 600;
-            font-size: 13px;
-            margin-left: 3px;
+        a {
+            color: #fff;
         }
         body {
-            margin: 0;
-            background-color: #1e293b;
-            display: grid;
-            height: 100vh;
-            place-items: center;
-            font-family: 'Source Sans Pro', sans-serif;
+            background  : black;
+
+            position: relative;
         }
-        .leaderboard {
-            box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
+        .poster {
+            position: fixed;
+            z-index: -999;
+            left: 60%;
+            top: 0;
+            height: 100%;
+            width: auto;
+        }
+        .poster img {
+            width: auto;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        @media screen and (max-width: 600px) {
+            .poster img {
+                margin: 0 auto;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .poster {
+                position: relative;
+                height: 25rem;
+                left: auto;
+                top: auto;
+            }
+        }
+        #bg {
+            top: 0;
+            left: 0;
+            position: fixed;
+            z-index: -998;
+        }
+        h1 {
+            margin  : 3%;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            position: static;
+
+
+
+
+        }
+        @media screen and (max-width: 600px) {
+            h1 {
+                top: 1.2rem;
+                left: 1rem;
+            }
+        }
+        nav {
+            z-index: 1;
+            position: fixed;
+            top: 4rem;
+            right: 4rem;
+        }
+        @media screen and (max-width: 600px) {
+            nav {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+        .wrapper {
+            position: relative;
+            height: 100vh;
+        }
+        .search {
+            float: right;
+            position: relative;
+        }
+        .search input:focus, .search .search:hover input, .search:hover .search input {
+            padding: 0.2rem 1rem 0.2rem 1rem;
+            width: 10rem;
+        }
+        .search__anim {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: solid 2px #979596;
+            position: relative;
+            float: right;
+        }
+        .search__anim::after {
+            content: "";
+            width: 2px;
+            height: 12px;
+            background-color: #979596;
+            position: absolute;
+            top: 12px;
+            left: 18px;
+            transform: rotate(135deg);
+        }
+        .search input {
+            float: right;
+            border: 0;
+            padding: 0.2rem 0 0.2rem 0;
+            height: 1rem;
+            width: 0;
+            margin-right: 1rem;
+            border-radius: 1.4rem;
+            transition: 0.3s all;
+            margin-left: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            -webkit-appearance: none;
+            outline: none;
+        }
+        .search button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0;
+        }
+        .filter {
+            padding-top: 0.2rem;
+            float: right;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            text-decoration: none;
+        }
+        #arrow {
+            fill: #fff;
+            width: 68px;
+            height: 18px;
+            float: right;
+        }
+        .arrow__container {
+            position: fixed;
+            bottom: 4rem;
+            right: 4rem;
+            z-index: 1;
+        }
+        @media screen and (max-width: 600px) {
+            .arrow__container {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+        .arrow__container p {
+            float: right;
+            padding-right: 1rem;
+        }
+        @media screen and (max-width: 600px) {
+            .arrow__container p {
+                display: none;
+            }
+        }
+        .container-margin {
+            padding: 0 10rem;
+        }
+        @media screen and (max-width: 600px) {
+            .container-margin {
+                padding: 1rem 1rem 0 1rem;
+            }
+        }
+        .movie {
+            max-width: 1150px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .movie__score, .review__score {
+            max-width: 55%;
+            width: 100%;
+            margin: 0 0;
+            padding-top: 20vh;
+            color: #e1262d;
+            font-size: 1.3rem;
+        }
+        @media screen and (max-width: 600px) {
+            .movie__score, .review__score {
+                padding-top: 0;
+                max-width: 100%;
+            }
+        }
+        .movie__title {
+            font-size: 4.5rem;
+            display: inline;
+            margin-right: 1rem;
+        }
+        @media screen and (max-width: 600px) {
+            .movie__title {
+                font-size: 2rem;
+            }
+        }
+        .movie__title__container {
+            max-width: 55%;
+            width: 100%;
+            margin: 0 0;
+            padding-top: 1rem;
+            transform: translateX(-0.25rem);
+        }
+        @media screen and (max-width: 600px) {
+            .movie__title__container {
+                max-width: 100%;
+            }
+        }
+        .movie__year {
+            font-size: 4.5rem;
+            display: inline;
+            color: #979596;
+        }
+        @media screen and (max-width: 600px) {
+            .movie__year {
+                font-size: 2rem;
+                max-width: 100%;
+            }
+        }
+        .movie__type {
+            max-width: 55%;
+            width: 100%;
+            margin: 0 0;
+        }
+        .movie__type li {
+            padding-right: 1.5rem;
+            padding-top: 1.5rem;
+            float: left;
+            color: #857f7f;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+        @media screen and (max-width: 600px) {
+            .movie__type {
+                max-width: 100%;
+            }
+        }
+        .movie__description, .review__description {
+            max-width: 55%;
+            width: 100%;
+            margin: 0 0;
+            float: none;
+            display: block;
+            color: #979596;
+            font-size: 1.1rem;
+            padding-top: 3rem;
+            line-height: 2rem;
+        }
+        @media screen and (max-width: 600px) {
+            .movie__description, .review__description {
+                max-width: 100%;
+            }
+        }
+        .movie__trailer {
+            margin-top: 3rem;
+            display: inline-block;
+            padding: 1.2rem 2.5rem 1.2rem 2.5rem;
+            border: solid 1px #494646;
+            cursor: pointer;
+            color: #979596;
+            transition: 0.3s all;
+        }
+        .movie__trailer svg {
+            width: 13px;
+            height: 16px;
+            fill: #979596;
+            float: left;
+            transition: 0.3s all;
+        }
+        .movie__trailer p {
+            padding-left: 1rem;
+            float: left;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            transition: 0.3s all;
+            font-size: 0.95rem;
+        }
+        .movie__trailer:hover {
+            border-color: #fff;
+        }
+        .movie__trailer:hover svg {
+            fill: #fff;
+        }
+        .movie__trailer:hover p {
+            color: #fff;
+        }
+        .review {
+            max-width: 1150px;
+            width: 100%;
+            margin: 0 auto;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .review__score {
+            padding-top: 2rem;
+        }
+        .review__title {
+            font-size: 1rem;
+            display: inline;
+            color: #979596;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+        @media screen and (max-width: 600px) {
+            .review__title {
+                font-size: 2rem;
+            }
+        }
+        .review__description {
+            padding-top: 1rem;
         }
 
     </style>
 
-{% endblock %}
 
+{% endblock %}

@@ -14,7 +14,7 @@
 body {
     margin: 0;
     width: 100%;
-    min-height: 1050px;
+    min-height: 900px;
     position: relative;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(to top, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.5)), url(https://i.postimg.cc/NjHjKtG4/US-en-20190128-popsignuptwoweeks-perspective-alpha-website-large.jpg);
     background-position: center center;

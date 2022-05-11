@@ -3,17 +3,12 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-
-
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <title>Netflix - Watch TV Shows Online, Watch Movies Online</title>
         <link href="{{ asset('assets/css/connected.css') }}" rel="stylesheet">
         <link rel="icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
-
     </head>
 
 
@@ -22,22 +17,25 @@
     <div class="wrapper">
 
         <!-- HEADER -->
-        <header>
-            <div class="netflixLogo">
-                <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
+        <nav class="navbar">
+            <div class="navbar-container container">
+                <input type="checkbox" name="" id="">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <ul class="menu-items">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/show/category/serie">Serie</a></li>
+                    <li><a href="/show/category/film">Film</a></li>
+                    <li><a href="/stripe">Retirer les pubs</a></li>
+
+                    <li><form action=""  method="post"><input id="search" name="search" type="text"></form></li>
+                </ul>
+                <a href="/"><h1 class="logo">Netflix</h1></a>
             </div>
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/show/category/serie">Series</a>
-                <a href="/show/category/film">Films</a>
-            </nav>
-            <nav class="sub-nav">
-
-                <a href="/stripe">Retirer la pub </a>
-
-                <form action="" method="post"> <input placeholder="chercher par titre" name="search" id="search" type="text"></form>
-            </nav>
-        </header>
+        </nav>
         <!-- END OF HEADER -->
 
 
@@ -52,7 +50,7 @@
                     <div class="box">
                         {% for series in serie %}
 
-                                <a href="/show/{{ series.token}}"><img  src="uploads/img/{{ series.image }}" alt="image"></a>
+                                <a href="/show/{{ series.token}}"><img  src="/uploads/img/{{ series.image }}"></a>
 
                         {% endfor %}
                     </div>
