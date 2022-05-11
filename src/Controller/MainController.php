@@ -56,18 +56,28 @@ class MainController extends AbstractController
                 "episodes" =>  $req,
         ]);
     }
-    #[Route('/show/category/{catergory}', name: 'show')]
-    public function catergory($category, SerieRepository $serieRepository)
+    #[Route('/show/category/{cate}', name: 'show_by_category')]
+    public function catergory(CategoriesOfUploadRepository $categoriesOfUploadRepository,$cate, SerieRepository $serieRepository, CategoryRepository $categoryRepository)
     {
-        $serie = $serieRepository->findBy(["catergory"=>$category]);
-        if (!$serie){
-            $this->redirectToRoute("app_main");
+        $serie = $serieRepository->findBy(["category" => $cate]);
+        $category = $categoryRepository->findOneBy(["name" => $cate]);
+
+        if ($serie) {
+
+            return $this->render('main/show_by_category.html.twig', [
+                "serie" => $serie
+            ]);
+        } elseif ($category) {
+            $serie = $categoriesOfUploadRepository->findBy(["category" => $category->getId()]);
+
+            return $this->render('main/show_by_category_spe.html.twig', [
+                "serie" => $serie
+            ]);
+        } else {
+            return $this->redirectToRoute("app_main");
         }
 
 
-        return $this->render('main/show_by_category.html.twig', [
-
-        ]);
     }
     /*
     #[Route('test', name: 'test')]

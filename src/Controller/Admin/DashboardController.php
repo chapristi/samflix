@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\CategoriesOfUpload;
 use App\Entity\Category;
+use App\Entity\Historical;
+use App\Entity\Order;
 use App\Entity\Serie;
 use App\Entity\SerieUpload;
 use App\Entity\Uploads;
@@ -88,5 +90,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('categoriesOfUploads', 'fas fa-list', CategoriesOfUpload::class);
         yield MenuItem::linkToCrud('serie', 'fas fa-list', Serie::class);
         yield MenuItem::linkToCrud('serieUploads', 'fas fa-list', SerieUpload::class);
+        yield MenuItem::linkToCrud('Order', 'fas fa-list', Order::class);
+        yield MenuItem::linkToCrud('Historical', 'fas fa-list', Historical::class);
+
     }
 }

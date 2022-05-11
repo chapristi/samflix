@@ -46,18 +46,18 @@
 
 
 
-            <section class="main-container" >
-                <div class="location" id="home">
-                    <h1 id="home">Correspond à ma recherche</h1>
-                    <div class="box">
-                        {% for series in serie %}
+        <section class="main-container" >
+            <div class="location" id="home">
+                <h1 id="home">Correspond à ma recherche</h1>
+                <div class="box">
+                    {% for series in serie %}
 
-                                <a href="/show/{{ series.token}}"><img  src="uploads/img/{{ series.image }}" alt="image"></a>
+                        <a href="/show/{{ series.serie.token}}"><img  src="uploads/img/{{ series.serie.image }}" alt="image"></a>
 
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
-            </section>
+            </div>
+        </section>
 
 
 
