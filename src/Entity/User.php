@@ -29,9 +29,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Order::class)]
     private $orders;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Historical::class)]
+    private $historicals;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->historicals = new ArrayCollection();
     }
 
 
@@ -154,6 +158,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($order->getIdUser() === $this) {
                 $order->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Historical>
+     */
+    public function getHistoricals(): Collection
+    {
+        return $this->historicals;
+    }
+
+    public function addHistorical(Historical $historical): self
+    {
+        if (!$this->historicals->contains($historical)) {
+            $this->historicals[] = $historical;
+            $historical->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorical(Historical $historical): self
+    {
+        if ($this->historicals->removeElement($historical)) {
+            // set the owning side to null (unless already changed)
+            if ($historical->getUser() === $this) {
+                $historical->setUser(null);
             }
         }
 

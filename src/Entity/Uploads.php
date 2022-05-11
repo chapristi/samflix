@@ -25,8 +25,6 @@ class Uploads
     #[ORM\Column(type: 'text')]
     private $video;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $category;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $token ;
@@ -39,9 +37,13 @@ class Uploads
 
     #[ORM\OneToMany(mappedBy: 'upload', targetEntity: SerieUpload::class)]
     private $serieUploads;
+
+    #[ORM\OneToMany(mappedBy: 'video', targetEntity: Historical::class)]
+    private $historicals;
     public function __construct(){
         $this->token =Uuid::uuid4();
         $this->serieUploads = new ArrayCollection();
+        $this->historicals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,17 +87,6 @@ class Uploads
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
 
     public function getToken(): ?string
     {
@@ -148,6 +139,36 @@ class Uploads
             // set the owning side to null (unless already changed)
             if ($serieUpload->getUpload() === $this) {
                 $serieUpload->setUpload(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Historical>
+     */
+    public function getHistoricals(): Collection
+    {
+        return $this->historicals;
+    }
+
+    public function addHistorical(Historical $historical): self
+    {
+        if (!$this->historicals->contains($historical)) {
+            $this->historicals[] = $historical;
+            $historical->setVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorical(Historical $historical): self
+    {
+        if ($this->historicals->removeElement($historical)) {
+            // set the owning side to null (unless already changed)
+            if ($historical->getVideo() === $this) {
+                $historical->setVideo(null);
             }
         }
 

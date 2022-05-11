@@ -7,28 +7,25 @@
 
 <article class="leaderboard">
     <header>
-
-
-
-        <h1 class="leaderboard__title"><span class="leaderboard__title--top">stranger things</span><span class="leaderboard__title--bottom"></span></h1>
+        <h1 class="leaderboard__title"><span class="leaderboard__title--top">{{ episodes[0].serie.name }}</span><span class="leaderboard__title--bottom"></span></h1>
     </header>
 
     <main class="leaderboard__profiles">
-        <article class="leaderboard__profile">
-            <img src="https://th.bing.com/th/id/OIP.mtBL-hgTg9MM45upECD7jwHaEK?pid=ImgDet&rs=1" alt="" class="leaderboard__picture">
-            <span class="leaderboard__name">épisode 1 (la nuit)</span>
-            <span class="leaderboard__value">45<span>mins</span></span>
-        </article>
-
-
-
-
+        {% for episodes in episodes %}
+            <a href="/player/video/{{ episodes.upload.token }}">
+                <article class="leaderboard__profile">
+                    <img src="/assets/images/{{ episodes.upload.image }}" alt="" class="leaderboard__picture">
+                    <span class="leaderboard__name">{{ episodes.upload.name }}</span>
+                    <span class="leaderboard__value">45<span>mins</span></span>
+                </article>
+            </a>
+        {% endfor %}
     </main>
     </div>
     </article>
     <style>
         .leaderboard {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             border-radius: 12px;
         }

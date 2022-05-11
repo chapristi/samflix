@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
+use App\Services\Mail\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class StripeController extends AbstractController
 
 
         if(!$this->getUser()){
-            return $this->redirectToRoute("app_main");
+            return $this->redirectToRoute("app_login");
         }
         \Stripe\Stripe::setApiKey('sk_test_51JooZkDfZJsKn0Qy1MSlslsEhZKbRgY3plDJRiZPE6Nb6rx0D3I22tBuRGDqNfQuaElzqlxNre9w0cAIpsxJG3em002pyn6sHi');
 
@@ -70,10 +71,10 @@ class StripeController extends AbstractController
         $order  = $orderRepository->findOneBy(["session_id" => $id ]);
         $order->setIsPaid(true);
         $this->entityManager->persist($order);
-
         $order->getIdUser()->setRoles(["ROLE_VIP"]);
         $this->entityManager->flush();
-        $this->addFlash('success' , 'Vous etes maintenant VIP!');
+        $mail = new MailService();
+        $mail->sendMail("louis.bec05@gmail.com","payment accpeted","<h3>Hey juste pour te dire : </h3><br />Ton achat a bien été effectué tu es maintenant VIP");
         return $this->redirectToRoute("app_main");
 
 
@@ -86,4 +87,6 @@ class StripeController extends AbstractController
 
 
     }
+
+
 }

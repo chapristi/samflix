@@ -34,6 +34,9 @@ class Serie
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $category;
+
     public function __construct()
     {
         $this->serieUploads = new ArrayCollection();
@@ -150,6 +153,18 @@ class Serie
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

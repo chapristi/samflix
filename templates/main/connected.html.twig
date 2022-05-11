@@ -33,7 +33,7 @@
             </nav>
             <nav class="sub-nav">
               
-                <a href="#">Account</a>
+                <a href="/stripe">Retirer la pub </a>
 
                 <form action="" method="post"> <input placeholder="chercher par titre" name="search" id="search" type="text"></form>
             </nav>
@@ -42,18 +42,31 @@
 
 
         <!-- MAIN CONTAINER -->
+
+        <section class="main-container" >
+                <div class="location" id="home">
+                    <h1 id="home">Mon Historique</h1>
+                    <div class="box">
+                        {% for historicals in historical %}
+                                <a href="/player/video/{{historicals.video.token}}"><img  src="uploads/img/{{ historicals.video.image }}" alt="a video"></a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
         {% for categories in categorie %}
         <section class="main-container" >
-            <div class="location" id="home">
-                <h1 id="home">{{ categories.name }}</h1>
-                <div class="box">
-                    {% for series in serie %}
-                        {% if categories.name == series.category.name  %}
-                        <a href="/show/{{ series.serie.token}}"><img src="uploads/img/{{ series.serie.image }}" alt=""></a>
-                        {% endif %}
-                    {% endfor %}
+                <div class="location" id="home">
+                    <h1 id="home">{{ categories.name }}</h1>
+                    <div class="box">
+                        {% for series in serie %}
+                            {% if categories.name == series.category.name  %}
+                            <a href="/show/{{ series.serie.token}}"><img  src="uploads/img/{{ series.serie.image }}" alt=""></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            </section>
             {% endfor %}
 
 
@@ -91,47 +104,8 @@
                 <p>&copy 1997-2018 Netflix, Inc.</p>
                 <p>Carlos Avila &copy 2018</p>
             </footer>
-            </section>
-    </div>
 
-    <div>
-
-
-    </div>
-
-    <script>
-        function closeMessage(el) {
-            el.addClass('is-hidden');
-        }
-
-        $('.js-messageClose').on('click', function(e) {
-            closeMessage($(this).closest('.Message'));
-        });
-
-        $('#js-helpMe').on('click', function(e) {
-            alert('Help you we will, young padawan');
-            closeMessage($(this).closest('.Message'));
-        });
-
-        $('#js-authMe').on('click', function(e) {
-            alert('Okelidokeli, requesting data transfer.');
-            closeMessage($(this).closest('.Message'));
-        });
-
-        $('#js-showMe').on('click', function(e) {
-            alert("You're off to our help section. See you later!");
-            closeMessage($(this).closest('.Message'));
-        });
-
-        $(document).ready(function() {
-            setTimeout(function() {
-                closeMessage($('#js-timer'));
-            }, 5000);
-        });
-    </script>
+        </div>
     </body>
-
-
-
 
 {% endblock %}

@@ -25,14 +25,6 @@ class UploadsCrudController extends AbstractCrudController
         return [
             yield IdField::new('id')->onlyOnIndex(),
             yield TextField::new('name'),
-            yield ChoiceField::new('category')
-                ->allowMultipleChoices()
-                ->autocomplete()
-                ->setChoices([  'séries' => "séries",
-                        'film' => 'film',
-
-                    ]
-                ),
             yield ImageField::new('image')
                 ->setBasePath('uploads/img')
                 ->setUploadDir('public/uploads/img/')

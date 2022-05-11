@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ResetPasswordController!{% endblock %}
+
+{% block body %}
+
+    <div class="form-container">
+        <form action="#" method="POST" class="form-wrap">
+            <h2>Forgot Password</h2>
+            <div class="form-box">
+                <input id="input" type="text" placeholder="Enter Email" />
+            </div>
+            <div class="form-submit">
+                <input id="btn" type="submit" value="Send" />
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("btn").addEventListener("click",(e)=>{
+            e.preventDefault();
+            if ( document.getElementById("input").value){
+                window.location.replace( "/reset/password/" + document.getElementById("input").value )
+            }
+        })
+    </script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: cadetblue;
+        }
+
+        .form-container {
+            display: flex;
+            height: 98vh;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container .form-wrap {
+            background: rgba(0, 0, 0, 0.7);
+            width: 70%;
+            height : 40%;
+            padding: 15px 20px;
+        }
+
+        .form-container .form-wrap h2 {
+            color: white;
+            font-family: "Roboto", sans-serif;
+            text-align: center;
+            margin: 0px 0px 20px;
+            font-size: 45px;
+        }
+
+        .form-container .form-wrap .form-box {
+            margin: 0px 0px 15px;
+        }
+
+        .form-container .form-wrap .form-box input[type="text"]{
+            padding: 23px 22px;
+            border-radius: 3px;
+            border: 1px solid #353535;
+            width: 100%;
+
+        }
+
+        .form-container .form-wrap .form-submit {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .form-container .form-wrap .form-submit input[type="submit"] {
+            padding: 15px 65px;
+            border: none;
+            border-radius: 2px;
+            background: #db202c;
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+    </style>
+
+{% endblock %}

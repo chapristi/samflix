@@ -36,6 +36,7 @@
         preload="auto"
         poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
 >
+
     <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
     <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
     <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
@@ -87,7 +88,7 @@
 
     // Adding a click event function
     myButtonDom.onclick = function(){
-        window.location.href = "/";
+        window.location.href = "{{ next }}";
     }
 </script>
 

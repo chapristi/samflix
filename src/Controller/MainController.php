@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CategoriesOfUploadRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\HistoricalRepository;
 use App\Repository\SerieRepository;
 use App\Repository\SerieUploadRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,24 +16,24 @@ class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
 
-    public function index(CategoriesOfUploadRepository $categoriesOfUploadRepository,Request $request, SerieRepository $serie, CategoryRepository $categoryRepository,SerieRepository $serieRepository): Response
+    public function index(HistoricalRepository $historicalRepository , CategoriesOfUploadRepository $categoriesOfUploadRepository,Request $request, SerieRepository $serie, CategoryRepository $categoryRepository,SerieRepository $serieRepository): Response
     {
 
         if($this->getUser()){
             if ($request->request->get("search")){
-
                $result = $serie->findBysearch(["name" =>(string)$request->request->get("search")]);
-
-
                 return $this->render('main/search.html.twig', [
                     "result" => $result
                 ]);
             }
+            $historical = $historicalRepository->findBy(["user"=>$this->getUser()]);
+
             $categorie = $categoryRepository->findAll();
             $serie = $categoriesOfUploadRepository->findAll();
             return $this->render('main/connected.html.twig', [
                 "categorie" => $categorie,
-                "serie" => $serie
+                "serie" => $serie,
+                "historical" => $historical
             ]);
         }
         return $this->render('main/index.html.twig', [
@@ -44,15 +45,50 @@ class MainController extends AbstractController
 
     {
         $seriefind = $serie->findOneBy(["token"=>$token]);
-        $req = $serieUploadRepository->findOneBy(["id"=>$seriefind->getId()]);
-        if($req->getUpload()->getCategory()==="film"){
-            $token = $req->getUpload()->getToken();
+        $req = $serieUploadRepository->findBy(["id"=>$seriefind->getId()]);
+        if($seriefind->getCategory()==="film"){
+            $token = $seriefind->getToken();
             return $this->redirectToRoute("app_player",["token"=>$token]);
         }
+
+
         return $this->render('main/show.html.twig', [
                 "episodes" =>  $req,
         ]);
     }
+    #[Route('/show/category/{catergory}', name: 'show')]
+    public function catergory($category, SerieRepository $serieRepository)
+    {
+        $serie = $serieRepository->findBy(["catergory"=>$category]);
+        if (!$serie){
+            $this->redirectToRoute("app_main");
+        }
+
+
+        return $this->render('main/show_by_category.html.twig', [
+
+        ]);
+    }
+    /*
+    #[Route('test', name: 'test')]
+    public function test(HistoricalRepository $historicalRepository , CategoriesOfUploadRepository $categoriesOfUploadRepository,Request $request, SerieRepository $serie, CategoryRepository $categoryRepository,SerieRepository $serieRepository)
+    {
+
+
+
+        $historical = $historicalRepository->findBy(["user"=>$this->getUser()]);
+
+        $categorie = $categoryRepository->findAll();
+        $serie = $categoriesOfUploadRepository->findAll();
+        return $this->render('main/test.html.twig', [
+            "categorie" => $categorie,
+            "serie" => $serie,
+            "historical" => $historical
+        ]);
+    }
+    */
+
+
 
 
 }

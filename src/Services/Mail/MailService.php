@@ -17,7 +17,7 @@ class MailService implements MailServiceInterface
     }
 
 
-    public function sendMail(string $user_mail,  string $subject,string $code): void
+    public function sendMail(string $user_mail,  string $subject,string $html): void
     {
 
 
@@ -38,7 +38,7 @@ class MailService implements MailServiceInterface
                     ],
                     'Subject' => "$subject",
                     'TextPart' => "My first Mailjet email",
-                    'HTMLPart' => "<h3>hey click to <a href='/reset/verif/$code'>reset your password</a>!</h3><br />May the delivery force be with you!",
+                    'HTMLPart' => $html,
 
                 ]
             ]
