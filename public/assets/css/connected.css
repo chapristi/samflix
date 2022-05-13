@@ -4,9 +4,18 @@
     --light: #F3F3F3;
     --dark: 	#686868;
 }
+.box{
+  margin-top : 50px
+}
+
 a{
     color: white;text-decoration:none;
 }
+h1{
+    color: white
+}
+
+
 html, body {
     width: 100vw;
     min-height: 100vh;
@@ -23,17 +32,15 @@ img {
     max-width: 100%;
 }
 
-h1 {
-    padding-top: 60px;
-}
 
 .wrapper {
-    margin: 0;
+    margin-top: 0;
     padding: 0;
 }
 
 /* HEADER */
 header {
+
     padding: 20px 20px 0 20px;
     position: fixed;
     top: 0;
@@ -42,10 +49,11 @@ header {
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas:
    "nt mn mn sb . . . ";
-    background-color: var(--primary);
+
     width: 100%;
-    margin-bottom: 0px;
+
 }
+
 
 .netflixLogo {
     grid-area: nt;
@@ -53,8 +61,6 @@ header {
     width: 100px;
     max-height: 100%;
 
-    padding-left: 30px;
-    padding-top: 0px;
 }
 
 .netflixLogo img {
@@ -62,7 +68,7 @@ header {
 }
 
 #logo {
-    color: #E50914;
+    color: white;
     margin: 0;
     padding: 0;
 }
@@ -71,6 +77,8 @@ header {
 .main-nav {
     grid-area: mn;
     padding: 0 30px 0 20px;
+    font-size: 20px;
+
 }
 
 .main-nav a {
@@ -102,7 +110,7 @@ header {
 
 /* MAIN CONTIANER */
 .main-container {
-    padding: 50px;
+    padding: 100px;
 }
 
 .box {
@@ -150,11 +158,11 @@ header {
 }
 
 .logos a{
-    padding: 10px;
+
 }
 
 .logo {
-    color: var(--dark);
+    color: cornflowerblue;
 }
 
 
@@ -162,9 +170,10 @@ header {
 footer {
     padding: 20px;
     text-align: center;
-    color: var(--dark);
+    color : white;
     margin: 10px;
 }
+
 
 /* MEDIA QUERIES */
 
@@ -183,6 +192,9 @@ footer {
         display: grid;
         grid-gap: 20px;
         grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+    .sidebar{
+        display:none;
     }
 
 }
@@ -310,7 +322,9 @@ input
 
 body {
     font-family: "Poppins", sans-serif;
-    background : black;
+    position: relative;
+    background: url("https://wallpapersflix.com/fr/wp-content/uploads/2020/06/Fond-D%C3%A9cran-Noir-PC.jpg") no-repeat center
+    center/cover;
 }
 
 /* ///////////..utility classes../////////// */
@@ -367,7 +381,7 @@ body {
     display: flex;
     justify-content: space-between;
     height: 64px;
-    align-items: center;
+    align-items : self-start;
 }
 
 .menu-items {
@@ -397,7 +411,7 @@ body {
 .logo {
     order: 1;
     font-size: 2.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom:3rem;
 }
 
 
@@ -483,6 +497,8 @@ body {
         margin-bottom: 1.5rem;
         font-size: 1.3rem;
         font-weight: 500;
+        color : white;
+
     }
 
     .logo {
@@ -490,6 +506,7 @@ body {
         top: 5px;
         right: 15px;
         font-size: 2rem;
+        color : cornflowerblue;
     }
 
     .navbar-container input[type="checkbox"]:checked ~ .menu-items {
@@ -567,7 +584,7 @@ body {
 
     .logo {
         position: absolute;
-        top: 06px;
+        top: 0px;
         right: 15px;
         font-size: 3rem;
     }
@@ -577,6 +594,12 @@ body {
         font-size: 1.8rem;
         font-weight: 500;
     }
+}
+@media (max-width: 1854px) {
+    .sidebar{
+        display:none;
+    }
+
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {
@@ -595,5 +618,78 @@ body {
     }
 }
 
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+
+
+
+
+
+.sidebar {
+    margin-left: -18%;
+    width: 240px;
+    height: 100%;
+
+
+    position: absolute;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    z-index: 100;
+}
+.sidebar #leftside-navigation ul, .sidebar #leftside-navigation ul ul {
+
+    margin: -2px 0 0;
+    padding: 0;
+}
+.sidebar #leftside-navigation ul li {
+    list-style-type: none;
+}
+
+.sidebar #leftside-navigation ul li.active ul {
+    display: block;
+}
+.sidebar #leftside-navigation ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 18px 0 18px 25px;
+    font-size: 20px;
+    outline: 0;
+    -webkit-transition: all 200ms ease-in;
+    -moz-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    -ms-transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+}
+
+.sidebar #leftside-navigation ul li a span {
+    display: inline-block;
+}
+.sidebar #leftside-navigation ul li a i {
+    width: 20px;
+}
+.sidebar #leftside-navigation ul li a i .fa-angle-left, .sidebar #leftside-navigation ul li a i .fa-angle-right {
+    padding-top: 3px;
+}
+.sidebar #leftside-navigation ul ul {
+    display: none;
+}
+.sidebar #leftside-navigation ul ul li {
+
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-bottom: none;
+}
+.sidebar #leftside-navigation ul ul li a {
+
+    font-size: 12px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+
+}
 
 

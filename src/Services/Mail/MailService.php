@@ -21,12 +21,13 @@ class MailService implements MailServiceInterface
     {
 
 
-
+        # Pour MailJet met ta key en premier et ton secret en deuxieme et change le mail d'envoie
         $mj = new \Mailjet\Client('30e115abbb9efeceacf3a918c2773f8e','2ddfe2039a7a84ce802f1c9f5c7784bc',true,['version' => 'v3.1']);
         $body = [
             'Messages' => [
                 [
                     'From' => [
+                        #change le mail d'envoie ici
                         'Email' => "chapristimailpro@gmail.com",
                         'Name' => "chapristi"
                     ],

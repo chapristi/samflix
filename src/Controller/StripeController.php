@@ -31,6 +31,7 @@ class StripeController extends AbstractController
         if(!$this->getUser()){
             return $this->redirectToRoute("app_login");
         }
+        #met ta clé publique et privée ici pour Stripe
         \Stripe\Stripe::setApiKey('sk_test_51JooZkDfZJsKn0Qy1MSlslsEhZKbRgY3plDJRiZPE6Nb6rx0D3I22tBuRGDqNfQuaElzqlxNre9w0cAIpsxJG3em002pyn6sHi');
 
         header('Content-Type: application/json');
@@ -39,6 +40,7 @@ class StripeController extends AbstractController
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'line_items' => [[
+                #met dcp l'objet mis en vente sur ton compte qui aura un id. tu le met juste ici
                 'price' => 'price_1KxyG4DfZJsKn0QyDy9OLjjb',
                 'quantity' => 1,
             ]],
